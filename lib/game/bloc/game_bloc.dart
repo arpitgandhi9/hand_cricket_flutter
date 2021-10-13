@@ -11,7 +11,12 @@ part 'game_event.dart';
 part 'game_state.dart';
 
 class GameBloc extends Bloc<GameEvent, GameState> {
+  // Change this to play with more than 2 players
+  final int TOTAL_WICKETS = 2;
+
   late GameInformation _information;
+
+  bool _isPlayerBatting = false;
 
   GameBloc() : super(GameInitial()) {
     on<GameEvent>((event, emit) {
@@ -29,11 +34,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
                 ? CoinSide.tail
                 : CoinSide.head;
         _information.tossWon = _determinedSide == event.coinSide;
+        _isPlayerBatting = _information.tossWon;
+
         showDialog(
           context: event.context,
           builder: (context) {
             return AlertDialog(
-              title: Text(_information.tossWon ? "You Won!" : "AI bats"),
+              title: Text(_information.tossWon ? "You Bat! 🎉" : "AI bats"),
               actions: [
                 ElevatedButton(
                   onPressed: () => Navigator.pop(context),
@@ -48,7 +55,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             );
           },
         );
-        emit(GamePlayStartState());
+        emit(const GamePlayStartState());
+      }
+
+      // TODO: compute the CPU and player score
+      if (event is GameNumberSelectionEvent) {
+        print(event.selectedNumber);
       }
     });
   }

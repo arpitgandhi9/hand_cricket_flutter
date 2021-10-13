@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hand_cricket/core/core.dart';
 
 import '../landing/landing.dart';
 import '../toss/toss.dart';
@@ -64,17 +65,51 @@ class _GameScreen extends State<GameScreen> {
           padding: const EdgeInsets.all(10),
           child: BlocBuilder<GameBloc, GameState>(
             builder: (context, state) {
-              if (state is GamePlayStartState) {
-                return Container();
+              if (state is GameInitial) {
+                return BlocProvider(
+                  create: (context) => TossBloc(),
+                  child: const TossScreen(),
+                );
               }
-              return BlocProvider(
-                create: (context) => TossBloc(),
-                child: const TossScreen(),
-              );
+              return _gamePlay(context, state);
             },
           ),
         ),
       ),
+    );
+  }
+
+  Widget _gamePlay(BuildContext context, GameState state) {
+    return Column(
+      children: [
+        Text(
+          state.openingTeamTitle,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+        Text(
+          state.followTeamTitle,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+        Text(
+          "AI selected ${state.aiSelection}",
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 22,
+          ),
+        ),
+        const SizedBox(height: 40),
+        RunSelectionGrid(onSelection: (number) {
+          BlocProvider.of<GameBloc>(context).add(
+            GameNumberSelectionEvent(context, selectedNumber: number),
+          );
+        }),
+      ],
     );
   }
 }

@@ -14,3 +14,13 @@ class GameTossResultEvent extends GameEvent {
     required this.selectedNumber,
   });
 }
+
+class GameNumberSelectionEvent extends GameEvent {
+  final BuildContext context;
+  final int selectedNumber;
+
+  GameNumberSelectionEvent(
+    this.context, {
+    required this.selectedNumber,
+  });
+}
