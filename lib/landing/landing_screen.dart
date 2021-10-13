@@ -10,9 +10,14 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
+        child: Column(
           children: [
+            const Expanded(
+              child: Image(
+                fit: BoxFit.fitWidth,
+                image: AssetImage("images/cricket.png"),
+              ),
+            ),
             Positioned(
               bottom: 100,
               child: ElevatedButton(
