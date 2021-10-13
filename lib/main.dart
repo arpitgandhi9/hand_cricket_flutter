@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'game/game.dart';
 import 'landing/landing.dart';
 
 main() async {
   await Hive.initFlutter();
+
+  Hive.registerAdapter(GameInformationAdapter());
+  Hive.registerAdapter(PlayerInformationAdapter());
   runApp(const MyApp());
 }
 

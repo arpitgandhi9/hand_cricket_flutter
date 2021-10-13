@@ -27,9 +27,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         if (event is GameTossResultEvent) {
           _information = GameInformation();
 
-          Hive.registerAdapter(GameInformationAdapter());
-          Hive.registerAdapter(PlayerInformationAdapter());
-
           // Computer number selection + 1 to start from 1
           int _aiSelection = Random().nextInt(6) + 1;
           print("AI: $_aiSelection");
