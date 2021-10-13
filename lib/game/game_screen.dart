@@ -20,7 +20,7 @@ class _GameScreen extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Game in Progress"),
+        title: const Text("Hand Cricket"),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
