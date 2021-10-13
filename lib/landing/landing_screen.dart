@@ -18,24 +18,21 @@ class LandingScreen extends StatelessWidget {
                 image: AssetImage("images/cricket.png"),
               ),
             ),
-            Positioned(
-              bottom: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return BlocProvider(
-                          create: (context) => GameBloc(),
-                          child: const GameScreen(),
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: const Text("Start Game"),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return BlocProvider(
+                        create: (context) => GameBloc(),
+                        child: const GameScreen(),
+                      );
+                    },
+                  ),
+                );
+              },
+              child: const Text("Start Game"),
             ),
           ],
         ),
