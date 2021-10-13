@@ -34,3 +34,27 @@ class GamePlayStartState extends GameState {
           popupMessage: "",
         );
 }
+
+class GamePlayUpdateState extends GameState {
+  const GamePlayUpdateState({
+    required String openingTeamTitle,
+    required String followTeamTitle,
+    required String popupMessage,
+    required int aiSelection,
+  }) : super(
+          aiSelection: aiSelection,
+          followTeamTitle: followTeamTitle,
+          openingTeamTitle: openingTeamTitle,
+          popupMessage: popupMessage,
+        );
+}
+
+class GameEndState extends GameState {
+  const GameEndState()
+      : super(
+          aiSelection: 0,
+          followTeamTitle: "",
+          openingTeamTitle: "",
+          popupMessage: "",
+        );
+}

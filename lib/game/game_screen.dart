@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hand_cricket/core/core.dart';
 
+import '../core/core.dart';
 import '../landing/landing.dart';
 import '../toss/toss.dart';
 import 'game.dart';

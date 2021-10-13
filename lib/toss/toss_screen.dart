@@ -29,6 +29,7 @@ class _TossScreen extends State<TossScreen> {
         ),
         const SizedBox(height: 40),
         RunSelectionGrid(
+          initialSelection: 1,
           onSelection: (number) {
             BlocProvider.of<TossBloc>(context).add(
               TossNumberSelectionEvent(number),
@@ -44,7 +45,7 @@ class _TossScreen extends State<TossScreen> {
               TossMakeDecisionEvent(context),
             );
           },
-          child: const Text("Next"),
+          child: const Text("Toss"),
         ),
       ],
     );

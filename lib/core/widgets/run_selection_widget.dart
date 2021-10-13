@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class RunSelectionGrid extends StatefulWidget {
   final Function(int number) onSelection;
+  final int initialSelection;
 
-  const RunSelectionGrid({Key? key, required this.onSelection})
-      : super(key: key);
+  const RunSelectionGrid({
+    Key? key,
+    required this.onSelection,
+    this.initialSelection = 0,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,6 +18,12 @@ class RunSelectionGrid extends StatefulWidget {
 
 class _RunSelectionGrid extends State<RunSelectionGrid> {
   int selectedNumber = 1;
+
+  @override
+  void initState() {
+    selectedNumber = widget.initialSelection;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
