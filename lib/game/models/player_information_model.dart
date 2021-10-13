@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'player_information_model.g.dart';
+
 @HiveType(typeId: 1)
 class PlayerInformation extends HiveObject {
   @HiveField(0)

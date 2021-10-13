@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import '../../landing/landing.dart';
 import 'package:meta/meta.dart';
 
@@ -25,6 +26,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       (event, emit) {
         if (event is GameTossResultEvent) {
           _information = GameInformation();
+
+          Hive.registerAdapter(GameInformationAdapter());
+          Hive.registerAdapter(PlayerInformationAdapter());
 
           // Computer number selection + 1 to start from 1
           int _aiSelection = Random().nextInt(6) + 1;
@@ -156,6 +160,16 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
     // END Game
     if (_wicketsTaken == TOTAL_WICKETS * 2) {
+      // Store match history for future
+      Hive.openBox('history').then((value) {
+        value.add(_information);
+        _information.save();
+
+        print("Saved");
+      });
+
+      int winDiff = (openingTeamScore - followTeamScore).abs();
+
       showDialog(
           context: context,
           barrierDismissible: false,
@@ -163,8 +177,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             return AlertDialog(
               title: Text(
                   openingTeamScore > followTeamScore && _information.tossWon
-                      ? "You win!! 🎉"
-                      : "AI always wins"),
+                      ? "You win by $winDiff!! 🎉"
+                      : "You lost randomly 😜 by $winDiff"),
               actions: [
                 ElevatedButton(
                   onPressed: () {
