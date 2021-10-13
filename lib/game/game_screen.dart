@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../landing/landing.dart';
 import '../toss/toss.dart';
+import 'game.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -61,9 +62,16 @@ class _GameScreen extends State<GameScreen> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(10),
-          child: BlocProvider(
-            create: (context) => TossBloc(),
-            child: const TossScreen(),
+          child: BlocBuilder<GameBloc, GameState>(
+            builder: (context, state) {
+              if (state is GamePlayStartState) {
+                return Container();
+              }
+              return BlocProvider(
+                create: (context) => TossBloc(),
+                child: const TossScreen(),
+              );
+            },
           ),
         ),
       ),

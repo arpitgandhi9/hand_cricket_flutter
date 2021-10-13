@@ -41,7 +41,7 @@ class _TossScreen extends State<TossScreen> {
         ElevatedButton(
           onPressed: () {
             BlocProvider.of<TossBloc>(context).add(
-              TossMakeDecisionEvent(),
+              TossMakeDecisionEvent(context),
             );
           },
           child: const Text("Next"),

@@ -15,4 +15,8 @@ class TossNumberSelectionEvent extends TossEvent {
   TossNumberSelectionEvent(this.number);
 }
 
-class TossMakeDecisionEvent extends TossEvent {}
+class TossMakeDecisionEvent extends TossEvent {
+  final BuildContext context;
+
+  TossMakeDecisionEvent(this.context);
+}

@@ -4,8 +4,13 @@ part of 'game_bloc.dart';
 abstract class GameEvent {}
 
 class GameTossResultEvent extends GameEvent {
+  final BuildContext context;
   final CoinSide coinSide;
   final int selectedNumber;
 
-  GameTossResultEvent(this.coinSide, this.selectedNumber);
+  GameTossResultEvent(
+    this.context, {
+    required this.coinSide,
+    required this.selectedNumber,
+  });
 }
