@@ -7,8 +7,11 @@ import 'landing/landing.dart';
 main() async {
   await Hive.initFlutter();
 
+  // Handle is elegantly with DAOs
   Hive.registerAdapter(GameInformationAdapter());
   Hive.registerAdapter(PlayerInformationAdapter());
+  Hive.openBox<GameInformation>("history");
+
   runApp(const MyApp());
 }
 

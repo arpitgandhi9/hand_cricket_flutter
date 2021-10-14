@@ -139,6 +139,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     for (var i = 0; i < _information.userPlayers.length; i++) {
       if (!isOut && _isUserBatting && _information.userPlayers[i].isPlaying) {
         _information.userPlayers[i].runs += userSelection;
+        _information.userPlayers[i].balls += 1;
       }
       _updateScore(_information.tossWon, _information.userPlayers[i]);
     }
@@ -146,6 +147,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     for (var i = 0; i < _information.aiPlayers.length; i++) {
       if (!isOut && !_isUserBatting && _information.aiPlayers[i].isPlaying) {
         _information.aiPlayers[i].runs += aiSelection;
+        _information.aiPlayers[i].balls += 1;
       }
       _updateScore(!_information.tossWon, _information.aiPlayers[i]);
     }
@@ -158,12 +160,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     // END Game
     if (_wicketsTaken == TOTAL_WICKETS * 2) {
       // Store match history for future
-      Hive.openBox('history').then((value) {
-        value.add(_information);
-        _information.save();
+      Hive.box<GameInformation>("history").add(_information);
+      _information.save();
 
-        print("Saved");
-      });
+      print("Saved");
 
       int winDiff = (openingTeamScore - followTeamScore).abs();
 

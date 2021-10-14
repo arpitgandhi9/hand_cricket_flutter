@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hand_cricket/highlights/highlights.dart';
 
 import '../game/game.dart';
 
@@ -33,6 +34,19 @@ class LandingScreen extends StatelessWidget {
                 );
               },
               child: const Text("Start Game"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const HighlightsScreen();
+                    },
+                  ),
+                );
+              },
+              child: const Text("Highlights"),
             ),
           ],
         ),
