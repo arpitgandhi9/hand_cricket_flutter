@@ -26,14 +26,14 @@ class HighlightsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _userSide("You", gi.userPlayers),
+                  _userSide("You", gi.userPlayers, gi.tossWon),
                   const Text(
                     " vs ",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  _userSide("AI", gi.aiPlayers),
+                  _userSide("AI", gi.aiPlayers, !gi.tossWon),
                 ],
               ),
             ),
@@ -43,7 +43,11 @@ class HighlightsScreen extends StatelessWidget {
     );
   }
 
-  Widget _userSide(String title, List<PlayerInformation> players) {
+  Widget _userSide(
+    String title,
+    List<PlayerInformation> players,
+    bool wonToss,
+  ) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(4),
@@ -51,7 +55,8 @@ class HighlightsScreen extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
+                color: wonToss ? Colors.amber : Colors.blueAccent,
                 fontWeight: FontWeight.w600,
               ),
             ),
